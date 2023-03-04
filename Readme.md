@@ -1,3 +1,8 @@
+## Личный проект «WhatToWatch»
+
+Студент: [Кирилл Соколов] (https://htmlacademy.ru/profile/id1964541).
+Наставник: [Дмитрий Мехов] (https://htmlacademy.ru/profile/id368057).
+
 # Руководство по работе с проектом
 
 Данный проект создан с помощью [Create React App](https://github.com/facebook/create-react-app).
