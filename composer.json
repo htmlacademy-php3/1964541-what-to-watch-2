@@ -1,0 +1,16 @@
+{
+    "name": "g123udini/1964541-what-to-watch-2",
+    "autoload": {
+        "psr-4": {
+            "Wtw\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "g123udini"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
