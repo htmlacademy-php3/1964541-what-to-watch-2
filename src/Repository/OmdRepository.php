@@ -2,27 +2,36 @@
 
 namespace Wtw\Repository;
 
-use GuzzleHttp\Client;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\ResponseInterface;
 use Wtw\Interface\MovieRepositoryInterface;
 
 class OmdRepository implements MovieRepositoryInterface
 {
-    private string $apikey = 'ed05385c';
     private string $baseUrl = 'http://www.omdbapi.com';
-    private readonly string $imdbId;
+    private readonly string $apikey;
 
-    public function __construct($imdbId)
+    private readonly ClientInterface $client;
+
+    public function __construct(string $apikey, ClientInterface $httpClient)
     {
-        $this->imdbId = $imdbId;
+        $this->apikey = $apikey;
+        $this->client = $httpClient;
     }
 
-    public function get(): array
+    private function sendRequest(string $imdbId): ResponseInterface
     {
-        $client = new Client([
-            'base_uri' => $this->baseUrl
+        return $this->client->request('GET', $this->baseUrl, [
+            'query' => [
+                'apikey' => $this->apikey,
+                'i' => $imdbId,
+            ]
         ]);
+    }
 
-        $response = $client->request('GET', "?i={$this->imdbId}&apikey={$this->apikey}");
+    public function get(string $imdbId): array
+    {
+        $response = $this->sendRequest($imdbId);
 
         return json_decode($response->getBody()->getContents(), true);
     }

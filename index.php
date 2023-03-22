@@ -1,9 +1,11 @@
 <?php
 
+use GuzzleHttp\Client;
 use Wtw\Repository\OmdRepository;
 
 require_once 'vendor/autoload.php';
 
-$repository = new OmdRepository('tt0208092');
+$client = new Client();
+$repository = new OmdRepository('571da7ed', $client);
 
-echo '<pre>' . print_r($repository->get(), true) . '</pre>';;
+echo '<pre>' . print_r($repository->get('tt0208092'), true) . '</pre>';;
